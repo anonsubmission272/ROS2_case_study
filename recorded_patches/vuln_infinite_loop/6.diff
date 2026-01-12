@@ -1,0 +1,15 @@
+--- controller.c
++++ controller.c
+@@ -56,11 +56,7 @@
+ 
+             }
+             
+-            if (i % 10000 == 0 && i > 0) {
+-                printf("iteration %d targeting %d\n", i, max_iterations);
+-
+-            }
+-            i++;
++            return 0;            i++;
+ 
+         }
+         

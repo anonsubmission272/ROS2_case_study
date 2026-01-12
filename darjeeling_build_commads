@@ -1,0 +1,3 @@
+gcc -c -o controller.o controller.c
+g++ -c -std=c++17 -o controller_main.o ../lib/test_driver.cpp
+g++ -o controller controller.o controller_main.o

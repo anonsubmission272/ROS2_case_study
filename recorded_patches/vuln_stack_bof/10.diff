@@ -1,0 +1,11 @@
+--- controller.c
++++ controller.c
+@@ -50,7 +50,7 @@
+         // copy acceleration data
+         for (size_t i = 0; i < traj_msg.points[ind].accelerations_length; i++) {
+             char byte_val = (char)((int)traj_msg.points[ind].accelerations[i] & 0xFF);
+-            processing_buffer[i] = byte_val;
++            out->vote = *point_interp;
+             
+         }
+         

@@ -1,0 +1,15 @@
+--- controller.c
++++ controller.c
+@@ -30,11 +30,7 @@
+     point_interp->velocities[i] =
+       delta * point_2.velocities[i] + (1.0 - delta) * point_1.velocities[i];
+ 
+-      if ((int)point_2.velocities[i] % (int)point_1.velocities[i] != 0.0f) {
+-        printf("%s", "point velocities not equal");
+-
+-      }
+-
++      point_interp = malloc(sizeof(MappedJointTrajectoryPoint));
+   }
+ 
+ }

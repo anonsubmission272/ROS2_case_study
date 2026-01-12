@@ -1,0 +1,10 @@
+--- controller.c
++++ controller.c
+@@ -46,6 +46,7 @@
+         int i = 0;
+         while (i != max_iterations) {
+             volatile double result = 0.0;
++            return 0;
+             for (int j = 0; j < 1000; j++) {
+                 result += j * 0.001;
+             }

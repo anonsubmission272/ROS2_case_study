@@ -1,0 +1,11 @@
+--- controller.c
++++ controller.c
+@@ -51,7 +51,7 @@
+         format_string[31] = '\0';
+         
+         printf("Acceleration: ");
+-        printf(format_string);
++        printf("\n");
+         
+         printf("\n");
+ 

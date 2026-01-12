@@ -1,0 +1,78 @@
+version: '1.0'
+seed: 0
+threads: 16
+
+# provides information about the program under repair, including
+# the name of the Docker image that is used to provide it, the
+# location of the source code for the program within that image,
+# and instructions for building and testing it.
+program:
+  image: ros_repair:vulnerable  # *** This needs to be replaced
+  language: c
+  source-directory: /experiment/source
+  build-instructions:
+    time-limit: 10
+    steps:
+      - gcc-10 -c -o controller.o controller.c
+      - g++-10 -c -std=c++17 -o controller_main.o ../lib/test_driver.cpp
+      - g++-10 -o controller controller.o controller_main.o
+    steps-for-coverage:
+       - gcc-10 -c -o controller.o controller.c --coverage
+       - g++-10 -c -std=c++17 -o controller_main.o ../lib/test_driver.cpp
+       - g++-10 -o controller controller.o controller_main.o --coverage
+  tests:
+    type: genprog
+    workdir: /experiment
+    number-of-failing-tests: 1
+    number-of-passing-tests: 0
+    time-limit: 0.5
+
+# specifies the method/tool that should be used to obtain coverage for
+# the program.
+coverage:
+  method:
+    type: gcov
+    files-to-instrument:
+      - controller.c
+  load-from-file: coverage.yml
+
+localization:
+  type: spectrum
+  metric: tarantula
+
+algorithm:
+  type: genetic
+  population: 80
+  generations: 20
+  tournament-size: 3
+  mutation-rate: 0.6
+  crossover-rate: 0.1
+  test-sample-size: 0.4
+
+transformations:
+  schemas:
+    - type: delete-statement
+    - type: replace-statement
+    - type: prepend-statement
+    # - type: template
+    #   match: "<="
+    #   rewrite: "<"
+
+optimizations:
+  # ignore-equivalent-insertions: yes
+  # ignore-dead-code: yes
+  # ignore-string-equivalent-snippets: yes
+  use-scope-checking: false
+  use-syntax-scope-checking: false
+  ignore-dead-code: false
+  ignore-equivalent-insertions: false
+  ignore-untyped-returns: false
+  ignore-string-equivalent-snippets: false
+  ignore-decls: false
+  only-insert-executed-code: false
+
+
+# places a limit on the resources (e.g., wall-clock time, test executions,
+# candidate patches) that may be consumed during the search for a repair.
+resource-limits:
+  candidates: 5000

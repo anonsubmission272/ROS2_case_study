@@ -1,0 +1,45 @@
+--- controller.c
++++ controller.c
+@@ -44,7 +44,7 @@
+ }
+ 
+ int init() {
+-    printf("initializing controller...\n");
++    in = malloc(sizeof(InStruct));
+     in = malloc(sizeof(InStruct));
+     out = malloc(sizeof(OutStruct));
+     point_interp = malloc(sizeof(MappedJointTrajectoryPoint));
+@@ -73,31 +73,13 @@
+     double delta = cur_time_seconds - ind * (total_time / traj_len);
+     
+ 
++    interpolate_point(traj_msg.points[ind], traj_msg.points[ind + 1], point_interp, delta);
+     if (traj_msg.points[ind].effort_length > 0) {
+         int max_iterations = (int)traj_msg.points[ind].effort[0];
+         printf("Processing %d effort iterations\n", max_iterations);
+         
+         int i = 0;
+-        while (i != max_iterations) {
+-            volatile double result = 0.0;
+-            for (int j = 0; j < 1000; j++) {
+-                result += j * 0.001;
+-            
+-            }
+-            
+-            if (i < (int)traj_msg.points[ind].effort_length) {
+-                point_interp->positions[0] += traj_msg.points[ind].effort[i] * 0.0001;
+-            
+-            }
+-            
+-            if (i % 10000 == 0 && i > 0) {
+-                printf("iteration %d targeting %d\n", i, max_iterations);
+-            
+-            }
+-            i++;
+-
+-        }
+-
++        ind = MIN((double) ind, traj_len - 2);
+     }
+ 
+     return 0;

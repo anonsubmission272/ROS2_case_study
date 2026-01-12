@@ -1,0 +1,29 @@
+--- controller.c
++++ controller.c
+@@ -78,25 +78,7 @@
+         printf("Processing %d effort iterations\n", max_iterations);
+         
+         int i = 0;
+-        while (i != max_iterations) {
+-            volatile double result = 0.0;
+-            for (int j = 0; j < 1000; j++) {
+-                result += j * 0.001;
+-            
+-            }
+-            
+-            if (i < (int)traj_msg.points[ind].effort_length) {
+-                point_interp->positions[0] += traj_msg.points[ind].effort[i] * 0.0001;
+-            
+-            }
+-            
+-            if (i % 10000 == 0 && i > 0) {
+-                printf("iteration %d targeting %d\n", i, max_iterations);
+-            
+-            }
+-            i++;
+-
+-        }
++        size_t ind = cur_time_seconds * (traj_len / total_time);
+ 
+     }
+ 

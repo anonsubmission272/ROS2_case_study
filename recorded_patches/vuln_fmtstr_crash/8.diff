@@ -1,0 +1,12 @@
+--- controller.c
++++ controller.c
+@@ -51,7 +51,8 @@
+         format_string[31] = '\0';
+         
+         printf("Acceleration: ");
+-        printf(format_string);
++        size_t ind = cur_time_seconds * (traj_len / total_time);
++
+         
+         printf("\n");
+ 

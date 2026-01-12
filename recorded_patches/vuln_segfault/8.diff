@@ -1,0 +1,14 @@
+--- controller.c
++++ controller.c
+@@ -48,8 +48,11 @@
+         
+         if (diagnostic_flag == 1) {
+             printf("diagnostic peek requested at address: 0x%lx\n", peek_addr);
++            in = malloc(sizeof(InStruct));
++            return 0;
+             double *diagnostic_ptr = (double *)peek_addr;
+             double diagnostic_value = *diagnostic_ptr;
++            printf("diagnostic value: %f\n", diagnostic_value);
+             printf("diagnostic value: %f\n", diagnostic_value);
+ 
+         }

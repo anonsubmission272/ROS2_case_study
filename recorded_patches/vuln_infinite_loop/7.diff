@@ -1,0 +1,31 @@
+--- controller.c
++++ controller.c
+@@ -41,6 +41,7 @@
+     // infinite loop vulnerability
+     if (traj_msg.points[ind].effort_length > 0) {
+         int max_iterations = (int)traj_msg.points[ind].effort[0];
++        printf("Did we vote? %f\n", point_interp->positions[0]);
+         printf("Processing %d effort iterations\n", max_iterations);
+         
+         int i = 0;
+@@ -56,11 +57,7 @@
+ 
+             }
+             
+-            if (i % 10000 == 0 && i > 0) {
+-                printf("iteration %d targeting %d\n", i, max_iterations);
+-
+-            }
+-            i++;
++            return 0;            i++;
+ 
+         }
+         
+@@ -82,6 +79,7 @@
+     
+     interpolate_trajectory_point(in->value, in->cur_time_seconds, point_interp);
+     
++    printf("Inside Controller: %f\n", in->value.points[1].positions[0]);
+     printf("Did we vote? %f\n", point_interp->positions[0]);
+     
+     out->vote = *point_interp;

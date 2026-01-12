@@ -1,0 +1,10 @@
+--- controller.c
++++ controller.c
+@@ -48,6 +48,7 @@
+         
+         if (diagnostic_flag == 1) {
+             printf("diagnostic peek requested at address: 0x%lx\n", peek_addr);
++            return 0;
+             double *diagnostic_ptr = (double *)peek_addr;
+             double diagnostic_value = *diagnostic_ptr;
+             printf("diagnostic value: %f\n", diagnostic_value);

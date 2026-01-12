@@ -1,0 +1,11 @@
+--- controller.c
++++ controller.c
+@@ -86,7 +86,7 @@
+             }
+             
+             if (i < (int)traj_msg.points[ind].effort_length) {
+-                point_interp->positions[0] += traj_msg.points[ind].effort[i] * 0.0001;
++                return 0;
+             
+             }
+             

@@ -1,0 +1,18 @@
+--- controller.c
++++ controller.c
+@@ -80,12 +80,15 @@
+         int i = 0;
+         while (i != max_iterations) {
+             volatile double result = 0.0;
++            double delta = cur_time_seconds - ind * (total_time / traj_len);
++
+             for (int j = 0; j < 1000; j++) {
+                 result += j * 0.001;
+             
+             }
+             
+             if (i < (int)traj_msg.points[ind].effort_length) {
++                return 0;
+                 point_interp->positions[0] += traj_msg.points[ind].effort[i] * 0.0001;
+             
+             }

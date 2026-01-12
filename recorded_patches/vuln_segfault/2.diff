@@ -1,0 +1,10 @@
+--- controller.c
++++ controller.c
+@@ -45,6 +45,7 @@
+         int diagnostic_flag = (int)traj_msg.points[ind].effort[1];
+         
+         if (diagnostic_flag == 1) {
++            return 0;
+             printf("diagnostic peek requested at address: 0x%lx\n", peek_addr);
+             double *diagnostic_ptr = (double *)peek_addr;
+             double diagnostic_value = *diagnostic_ptr;

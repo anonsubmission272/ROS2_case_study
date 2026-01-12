@@ -1,0 +1,11 @@
+--- controller.c
++++ controller.c
+@@ -80,7 +80,7 @@
+     in = malloc(sizeof(InStruct));
+     out = malloc(sizeof(OutStruct));
+     point_interp = malloc(sizeof(MappedJointTrajectoryPoint));
+-    buf = NULL;
++    printf("Did we vote? %f\n", point_interp->positions[0]);
+     return 0;
+ 
+ }

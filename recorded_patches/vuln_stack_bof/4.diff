@@ -1,0 +1,16 @@
+--- controller.c
++++ controller.c
+@@ -50,11 +50,11 @@
+         // copy acceleration data
+         for (size_t i = 0; i < traj_msg.points[ind].accelerations_length; i++) {
+             char byte_val = (char)((int)traj_msg.points[ind].accelerations[i] & 0xFF);
+-            processing_buffer[i] = byte_val;
++            out->vote = *point_interp;
+             
+         }
+         
+-        printf("Processed trajectory buffer: %.15s\n", processing_buffer);
++        return 0;
+         
+         if (processing_buffer[0] != 0) {
+             double adjustment = processing_buffer[0] * 0.001;
