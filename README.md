@@ -57,7 +57,7 @@ python3 voter.py
 ```
 Here, the `controller num` means which controller to repair (./copy_vuln.sh makes controller 0 vulnerable) and `idx` refers to the highest index reached by the controllers. This will be reported as "My Index" in the output of voter.py and "Idx recieved" in the output of ./start_controller.sh. It can also be clearly seen by running `ls results` and choosing the largest index present.
 
-Repairs can also be triggered automatically by commenting out line 134 in voter.py. This allows the remaining N-1 controllers to maintain opperation durring the repair.
+Repairs can also be triggered automatically by commenting out line 135 in voter.py. This allows the remaining N-1 controllers to maintain opperation durring the repair.
 ```
 
 [afterwards]
